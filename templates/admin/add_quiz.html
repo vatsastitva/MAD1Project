@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Quiz</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32x32.png') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    {% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_quiz.css') }}">
+    <style>
+        body {
+            background: url("{{ url_for('static', filename='img/bgimage.jpg') }}") no-repeat center top fixed;
+            background-size: cover; 
+            background-position: center -5vh;
+            background-attachment: fixed;
+            min-height: 100vh; /* Ensure it covers the whole screen */
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.192); /* Dark overlay */
+            z-index: -1;
+        }
+    </style>
+    {% endblock %}
+</head>
+<body>
+    <div class="quiz-container">
+        <h3>New Quiz</h3>
+        <form action="{{ url_for('admin.add_quiz', chapter_id=chapter_id) }}" method="POST">
+            <div class="form-group">
+                <label for="name">QuizName:</label>
+                <input type="text" id="chapter_id" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="chapter_id">Chapter ID:</label>
+                <input type="text" id="chapter_id" name="chapter_id" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="date_of_quiz">Date:</label>
+                <input type="date" id="date_of_quiz" name="date_of_quiz" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="hours">Duration (HH:MM):</label>
+                <div class="d-flex w-50">
+                    <input type="number" id="hours" name="hours" class="form-control w-20" min="0" max="4" required>
+                    <span class="mx-2 mt-1"><strong>:</strong></span>
+                    <input type="number" id="minutes" name="minutes" class="form-control w-20" min="0" max="59" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="remarks">Remarks:</label>
+                <input type="text" id="remarks" name="remarks" class="form-control">
+            </div>
+            <div class="btn-container">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" onclick="window.history.back()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

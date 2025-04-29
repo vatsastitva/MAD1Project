@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Quiz Master</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32x32.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url("{{ url_for('static', filename='img/bgimage.jpg') }}") no-repeat center top fixed;
+            background-size: cover; 
+            background-position: center -5vh;
+            background-attachment: fixed;
+            min-height: 100vh; /* Ensure it covers the whole screen */
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.078); /* Dark overlay */
+            z-index: -1;
+        }
+        
+        .register-container {
+            display: flex;
+            width: 900px;
+            box-shadow: 10px 8px 8px rgba(0, 0, 0, 0.54);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .left-section {
+            width: 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #8fa5ffcb;
+            padding: 0px;
+        }
+        .left-section img {
+            max-width: 300px;
+            height: 450px;
+        }
+        .right-section {
+            width: 60%;
+            padding: 40px;
+            background-color: #e9e9e9d9;
+        }
+        
+        .btn-custom {
+            width: 100%;
+        }
+        .btn-custom:hover {
+            background-color: #282828;
+        }
+        .text-danger {
+            text-decoration: none;
+        }
+        
+
+    </style>
+</head>
+<body>
+<!-- Flash Message Container -->
+<div id="flash-container" style="position: fixed; top: 20px; right: 20px; z-index: 1050;">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show flash-alert" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+<div class="register-container">
+    <!-- Left Panel -->
+    <div class="left-section">
+        <img src="{{ url_for('static', filename='img/register.svg') }}" alt="Registration Icon">
+    </div>
+
+    <!-- Right Panel (Form) -->
+    <div class="right-section">
+        <h3 class="text-dark mb-4">Registration</h3>
+        <form action="{{ url_for('user.register') }}" method="POST">
+            
+            <div class="mb-2">
+                <label for="email" class="form-label">User name (E-mail):</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="mb-2">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <div class="mb-2">
+                <label for="full_name" class="form-label">Full Name:</label>
+                <input type="text" class="form-control" id="full_name" name="full_name" required>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="qualification" class="form-label">Qualification:</label>
+                    <input type="text" class="form-control" id="qualification" name="qualification" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="dob" class="form-label">Date of Birth:</label>
+                    <input type="date" class="form-control" id="dob" name="dob" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-custom">Submit</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <p>Existing User? <a href="{{ url_for('user.login') }}" class="text-danger"><u>Login Here</u></a></p>
+        </div>
+    </div>
+</div>
+<script>
+    // Auto-hide flash messages after 3 seconds
+    setTimeout(() => {
+        const alerts = document.querySelectorAll('.flash-alert');
+        alerts.forEach(alert => {
+            // Use Bootstrap's fade out manually
+            alert.classList.remove('show');
+            alert.classList.add('hide');
+            setTimeout(() => alert.remove(), 500); // Remove from DOM after fade out
+        });
+    }, 3000);
+</script>
+
+</body>
+</html>

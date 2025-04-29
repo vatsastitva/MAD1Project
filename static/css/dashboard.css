@@ -1,0 +1,55 @@
+.subject-card {
+    border-radius: 15px;
+    padding: 20px;
+    
+    background: #c3cbc2e9;
+    margin-bottom: 20px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.679);
+
+}
+.table-custom {
+    border-radius: 12px;
+    border: 2px solid #000;
+    border-collapse: separate;
+    border-spacing: 0px;
+    overflow: hidden;
+    
+}
+
+.table-custom th, .table-custom td {
+    border-bottom: #000 solid 2px;
+    background-color:#aeb4b0eb;
+}
+.add-subject-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #223e27;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 30px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.add-subject-btn:hover {
+    background-color: #40764a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.chart-box {
+    width: 45%;
+}

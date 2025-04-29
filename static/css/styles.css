@@ -1,0 +1,58 @@
+body {
+    background-color: white;
+}
+.navbar {
+    border-radius: 15px;
+    margin: 10px;
+    background-color: #223e27bc;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.7);
+}
+
+.nav-item {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Oswald, sans-serif;
+}
+
+.subject-card {
+    border-radius: 15px;
+    padding: 20px;
+    
+    background: #a2a7a3;
+    margin-bottom: 20px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7);
+
+}
+.search-dropdown {
+    position: absolute;
+    background: rgb(72, 97, 74);
+    border: 1px solid #ddd;
+    width: 250px;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.dropdown-divider {
+    border-top: 2px dashed #444343;
+    margin: 4px 0;
+}
+.dropdown-item {
+    white-space: normal !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+#search-input::placeholder {
+    color: white;
+}
+
+#search-input {
+    background-color: #223e27bc; /* Dark background */
+    color: white; /* User-typed text color */
+    border: 1px solid white; /* Border color */
+}

@@ -1,0 +1,29 @@
+body {
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.quiz-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+.quiz-container h3 {
+    color: #e67e22;
+}
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+label {
+    font-weight: bold;
+}
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}

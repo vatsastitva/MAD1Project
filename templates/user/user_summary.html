@@ -1,0 +1,45 @@
+{% extends 'user/base.html' %}
+{% block title %} Summary {% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/summary.css') }}">
+    <style>
+        body {
+            background: url("{{ url_for('static', filename='img/bgimage.jpg') }}") no-repeat center top fixed;
+            background-size: cover; 
+            background-position: center -5vh;
+            background-attachment: fixed;
+            min-height: 100vh; /* Ensure it covers the whole screen */
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.671); /* Dark overlay */
+            z-index: -1;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="chart-container">
+        <!-- Bar Chart for Subject Wise Quiz Count -->
+        <div class="chart-container-coustom">
+            <h5 class="text-center" style="padding: 10px; border-radius: 10px; background-color: rgba(31, 60, 142, 0.796);">Subject Wise Performance</h5>
+            <canvas id="subjectQuizChart"></canvas>
+        </div>
+
+        <!-- Pie Chart for Monthly Quiz Attempts -->
+        <div class="chart-box">
+            <h5 class="text-center mb-4" style="padding: 10px; border-radius: 10px; background-color: rgba(31, 60, 142, 0.796);">Month Wise Number of Quizzes Attempted</h5>
+            <canvas id="monthlyQuizChart"></canvas>
+        </div>
+    </div>  
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/user_summary.js') }}"></script>
+{% endblock %}

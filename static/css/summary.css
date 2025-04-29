@@ -1,0 +1,17 @@
+.chart-container {
+    display: flex;
+    color: #ffffff;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.chart-box {
+    width: 40%;
+    color: rgb(255, 255, 255);
+    margin-left: 50px;
+}
+
+.chart-container-coustom {
+    width: 45%;
+    height: 60%;
+    margin-top: 120px;
+}

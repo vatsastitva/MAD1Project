@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon-32x32.png') }}">
+    
+    <title>Quiz Master - Home</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Ensure the background image loads correctly */
+        body {
+            background: url("{{ url_for('static', filename='img/bgimage.jpg') }}") no-repeat center top fixed;
+            background-size: cover; 
+            background-position: center -5vh;
+            background-attachment: fixed;
+            min-height: 100vh; /* Ensure it covers the whole screen */
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.192); /* Dark overlay */
+            z-index: -1;
+        }
+        .home-container {
+            display: flex;
+            width: 700px;
+            height: 340px;
+        }
+        .left-section {
+            width: 50%;
+            margin-right: 5px;
+            box-shadow: 4px 4px 8px rgb(0, 0, 0);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #324bafca;
+            padding: 5px;
+        }
+        .left-section img {
+            max-width: 295px;
+            height: 295px;
+        }
+            
+        .right-section img {
+            max-width: 295px;
+            height: auto;
+        }
+        .right-section {
+            width: 50%;
+            margin-left: 5px;
+            padding: 5px;
+            box-shadow: 4px 4px 8px rgb(0, 0, 0);
+            border-radius: 10px;
+            background-color: #7a7a7ad4;
+        }
+        
+        
+        
+        
+    </style>
+</head>
+<body class="text-white">
+<!-- Flash Message Container -->
+<div id="flash-container" class="fixed top-5 right-5 z-50 space-y-2">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-alert px-4 py-3 rounded shadow-md text-white
+                            {% if category == 'success' %}bg-green-500{% elif category == 'error' %}bg-sky-500{% elif category == 'warning' %}bg-yellow-500 text-black{% else %}bg-red-500{% endif %}">
+                {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>   
+    <div class="container mx-auto min-h-screen flex items-center">
+        <!-- Left Content Section -->
+        <div class="w-2/3 text-left text-white">
+            <h1 class="text-6xl font-bold text-indigo-400 mb-4">Welcome to Quiz Master</h1>
+            <p class="text-lg text-white mb-10 w-3/4">
+                Master every quiz, track your success,🚀 and stay ahead of the competition.🏆Designed for learners, built for admins.
+            </p>
+
+            <!-- Admin & User Sections (Side by Side) -->
+            <div class="home-container">
+                <!-- Admin Section -->
+                <div class="left-section flex flex-col items-center justify-between">
+                    <a href="/admin/login" class="text-center text-xl font-bold " style="text-shadow: 4px 4px 0px rgb(0, 0, 0);"> 
+                    <img src="{{ url_for('static', filename='img/admin-image.png') }}" alt="Clickable Image" class="transition duration-300 transform hover:scale-110">
+                    ADMINISTRATOR</a>
+                    
+                    
+                </div>
+
+                <!-- User Section -->
+                <div class="right-section flex flex-col items-center justify-between">
+                    <a href="/user/login" class="text-center text-xl font-bold" style="text-shadow: 4px 4px 0px rgb(0, 0, 0);"> 
+                    <img src="{{ url_for('static', filename='img/user-image.png') }}" alt="Clickable Image" class="transition duration-300 transform hover:scale-110">
+                    USER</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    setTimeout(() => {
+        const alerts = document.querySelectorAll('.flash-alert');
+        alerts.forEach(alert => {
+        alert.classList.add('hide');
+        setTimeout(() => alert.remove(), 500);
+        });
+    }, 3000);
+</script>
+</body>
+</html>

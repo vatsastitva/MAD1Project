@@ -1,0 +1,18 @@
+.table-container {
+    background: #ffaa00e8;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0);
+    width: 60%;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 80px;
+}
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0);
+}

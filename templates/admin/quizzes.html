@@ -1,0 +1,96 @@
+{% extends 'admin/base.html' %}
+{% block title %} Quizzes {% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quizzes.css') }}">
+    <style>
+        body {
+            background: url("{{ url_for('static', filename='img/bgimage.jpg') }}") no-repeat center top fixed;
+            background-size: cover; 
+            background-position: center -5vh;
+            background-attachment: fixed;
+            min-height: 100vh; /* Ensure it covers the whole screen */
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.441); /* Dark overlay */
+            z-index: -1;
+        }
+    </style>
+{% endblock %}
+
+    {% block content %}
+        <div class="row">
+            {% for quiz in quizzes %}
+            <div class="col-md-6">
+                <div class="quiz-card">
+                    <div class="quiz-info d-flex align-items-center justify-content-between w-100">
+                        <h4 class="mb-0"><a href="#" class="quiz-link text-dark text-decoration-none" 
+                            onclick="showQuizDetails('{{ quiz.subject_name }}', '{{ quiz.chapter_name }}', '{{ quiz.total_ques }}', '{{ quiz.total_marks }}', event)">
+                            Quiz {{ quiz.id }} - {{ quiz.name }}
+                         </a></h4>
+                        <div class="ms-auto">
+                            <button class="btn btn-primary me-2" onclick="redirectToEditQuiz('{{ quiz.id }}')">Edit</button>
+                            <button class="btn btn-danger" onclick="redirectToDeleteQuiz('{{ quiz.id }}')">Delete</button>
+                        </div>
+                    </div>
+                    <table class="table mt-3 table-custom">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Ques ID</th>
+                                <th>Correct Option</th>
+                                <th>Points</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            {% for question in questions %}
+                                {% if question.quiz_id == quiz.id %}
+                                <tr class="text-center">
+                                    <td>{{ question.id }}</td>
+                                    <td>Option {{ question.correct_option }}</td>
+                                    <td>{{ question.marks }}</td>
+                                    <td>
+                                        <a href="{{ url_for('admin.edit_question', id=question.id) }}" >Edit</a> |
+                                        <a href="{{ url_for('admin.delete_question', id=question.id) }}" 
+                                        onclick="return confirm('Are you sure you want to delete this question?');" 
+                                        class="text-danger">
+                                        Delete
+                                     </a></td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    
+                    <button class="btn btn-danger" onclick="redirectToAddQuestion('{{ quiz.id }}')">+ Question</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <p class="text-white mt-3"><strong>All chapters here ...</strong></p>
+    <button class="btn btn-success add-quiz-btn" onclick="redirectToAddQuiz()">+ New Quiz</button>
+    {% endblock %}
+    
+    
+    
+    
+
+    <!-- Bootstrap Modal for Quiz Details -->
+    {% block quiz_details %}
+        <div class="quiz-popup-content">
+            <span class="close-btn" onclick="hideQuizPopup()">&times;</span>
+            <p><strong>Subject:</strong> <span id="subjectname"></span></p>
+            <p><strong>Chapter:</strong> <span id="chaptername"></span></p>
+            <p><strong>Total Questions:</strong> <span id="totalques"></span></p>
+            <p><strong>Total Marks:</strong> <span id="totalmarks"></span></p>
+        </div>
+    {% endblock %}
+
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='js/quizzes.js') }}"></script>
+    {% endblock %}    

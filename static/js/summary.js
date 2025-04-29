@@ -2,11 +2,13 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch('/admin/summary_data')
         .then(response => response.json())
         .then(data => {
-            const highestScores = data.highestScores;
+            //const highestScores = data.highestScores;
+            const averageScores = data.averageScores;
             const userAttempts = data.userAttempts;
 
-            const subjects = Object.keys(highestScores);
-            const topScores = Object.values(highestScores);
+            const subjects = Object.keys(averageScores);
+            //const topScores = Object.values(highestScores);
+            const avgScores = Object.values(averageScores);
             const attemptsData = Object.values(userAttempts);
 
             // Bar Chart - Top Scores
@@ -16,8 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 data: {
                     labels: subjects,
                     datasets: [{
-                        label: 'Top Scores',
-                        data: topScores,
+                        //label: ' Avg Score(%) ',
+                        data: avgScores,
                         backgroundColor: [
                             'rgb(255, 69, 69)',  // Red
                             'rgb(54, 163, 235)',  // Blue
@@ -45,6 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         },
                         y: {
                             beginAtZero: true,
+                            //min: 0,
+                            max:100,
                             ticks: {
                                 color: "white",
                                 font: { size: 14 }  // 🔹 Y-axis text color
@@ -62,6 +66,20 @@ document.addEventListener("DOMContentLoaded", function () {
                             labels: {
                                 color: "white",
                                 font: { size: 16 }  // 🔹 Legend text color
+                            }
+                        },
+                        tooltip: {
+                            //titleFont: { size: 12, weight: 'bold' },
+                            //bodyFont: { size: 12, weight: 'bold' },
+                            //backgroundColor: 'rgba(0, 0, 0, 0.89)', // 🔸 Tooltip background
+                            //titleColor: 'white',                  // 🔸 Title text color
+                            //bodyColor: 'white',                   // 🔸 Body text color
+                            //borderColor: 'white',                 // 🔸 Optional border
+                            //borderWidth: 2,
+                            callbacks: {
+                                label: function (context){
+                                    return ` Avg Score : ${(context.parsed.y).toFixed(2)}%`;
+                                }
                             }
                         }
                     }

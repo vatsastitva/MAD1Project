@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     scales: {
                         y: {
                             beginAtZero: true,
-                            min: 0,
+                            //min: 0,
                             max:100,
                             ticks: {
                                 stepSize: 10,
@@ -71,6 +71,13 @@ document.addEventListener("DOMContentLoaded", function () {
                             labels: {
                                 color: "white",
                                 font: { size: 18 }
+                            }
+                        },
+                        tooltip:{
+                            callbacks: {
+                                label: function (context){
+                                    return `Score: ${(context.parsed.y).toFixed(2)}%`;
+                                }
                             }
                         }
                     }

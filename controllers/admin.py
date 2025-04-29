@@ -67,13 +67,20 @@ def quizzes():
 @admin_required
 def summary_data():
     query1 = text("""
-        SELECT q.subject_name, MAX(sc.total_scored) AS highest_score
-        FROM quiz q
-        JOIN score sc ON q.id = sc.quiz_id
-        GROUP BY q.subject_name
+        SELECT 
+            q.subject_name, 
+            MAX(sc.total_scored) AS highest_score,
+            (AVG(sc.total_scored)/q.total_marks)*100 AS average_score
+        FROM 
+            quiz q
+        JOIN 
+            score sc ON q.id = sc.quiz_id
+        GROUP BY 
+            q.subject_name;
     """)
-    highest_scores = db.session.execute(query1).fetchall()
-    highest_scores = {row[0]: row[1] for row in highest_scores}
+    Scores = db.session.execute(query1).fetchall()
+    highest_scores = {row[0]: row[1] for row in Scores}
+    average_scores = {row[0]: row[2] for row in Scores}
 
     query2 = text("""
         SELECT q.subject_name, COUNT(sc.id) AS user_attempts 
@@ -84,7 +91,7 @@ def summary_data():
     user_attempts = db.session.execute(query2).fetchall()
     user_attempts = {row[0]: row[1] for row in user_attempts}
 
-    return jsonify({'highestScores': highest_scores, 'userAttempts': user_attempts})
+    return jsonify({'highestScores': highest_scores,'averageScores': average_scores, 'userAttempts': user_attempts})
 
 @admin_bp.route('/summary')
 @admin_required

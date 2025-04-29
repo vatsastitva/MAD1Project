@@ -69,6 +69,19 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{ url_for('static', filename='js/dashboards.js') }}"></script>
-    
+<script>
+    function redirectToEditSubject(subjectId) {
+        window.location.href = `/admin/subjects/edit/${subjectId}`;
+    }
+    function redirectToDeleteSubject(subjectId) {
+        window.location.href = `/admin/subjects/delete/${subjectId}`;
+    }
+
+    function redirectToAddChapter(subjectId) {
+        window.location.href = `/admin/chapters/add/${subjectId}`;
+    }
+    function redirectToAddSubject() {
+        window.location.href = `/admin/add_subject`;
+    }
+</script>
 {% endblock %}
